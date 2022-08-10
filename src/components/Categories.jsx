@@ -17,6 +17,7 @@ export default class Categories extends Component {
     const { inputChange } = this.props;
     return (
       <form className="categories">
+        <h2>categorias</h2>
         { categories.map((category) => (
           <label
             className="radio"
