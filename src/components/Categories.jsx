@@ -16,9 +16,15 @@ export default class Categories extends Component {
     const { categories } = this.state;
     const { inputChange } = this.props;
     return (
-      <form>
+      <form className="categories">
+        <h2>categorias</h2>
         { categories.map((category) => (
-          <label key={ category.id } htmlFor={ category.id } data-testid="category">
+          <label
+            className="radio"
+            key={ category.id }
+            htmlFor={ category.id }
+            data-testid="category"
+          >
             <input
               type="radio"
               id={ category.id }

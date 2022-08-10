@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './Products.css';
 
 class Products extends Component {
   render() {
     const { name, image, price, id } = this.props;
     return (
-      <Link to={ `/Product/${id}` } data-testid="product-detail-link">
-        <div data-testid="product">
-          <img src={ image } alt={ name } />
-          <h2>{ name }</h2>
-          <p>{ price }</p>
+      <Link className="link" to={ `/Product/${id}` } data-testid="product-detail-link">
+        <div className="product-card" data-testid="product">
+          <img className="product-image" src={ image } alt={ name } />
+          <strong className="product-title">{ name }</strong>
+          <p className="product-price">
+            R$
+            {' '}
+            { price }
+          </p>
         </div>
       </Link>
     );
