@@ -47,7 +47,7 @@ export default class Search extends Component {
     return (
       <section>
         <header className="main-header">
-          <h1>MercaDão</h1>
+          <h1 className="title">MercaDão</h1>
           <div className="serch-form-cont">
             <div className="serch-form">
               <input
@@ -95,7 +95,7 @@ export default class Search extends Component {
                 products.map((product) => {
                   const { price, title, thumbnail, id } = product;
                   return (
-                    <div key={ id }>
+                    <div className="product" key={ id }>
                       <Products
                         name={ title }
                         price={ price }
