@@ -8,10 +8,14 @@ class Products extends Component {
     const { name, image, price, id } = this.props;
     return (
       <Link className="link" to={ `/Product/${id}` } data-testid="product-detail-link">
-        <div className="product-cart" data-testid="product">
+        <div className="product-card" data-testid="product">
           <img className="product-image" src={ image } alt={ name } />
-          <h2 className="product-title">{ name }</h2>
-          <p className="product-price">{ price }</p>
+          <strong className="product-title">{ name }</strong>
+          <p className="product-price">
+            R$
+            {' '}
+            { price }
+          </p>
         </div>
       </Link>
     );
