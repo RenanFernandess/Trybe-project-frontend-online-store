@@ -1,0 +1,21 @@
+.product-card {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+}
+
+.product-image {
+  grid-area: image;
+}
+
+.product-title {
+  grid-area: title;
+}
+
+.product-price {
+  grid-area: price;
+}
+
+.link {
+  color: var(--main-text-color);
+  text-decoration: none;
+}
