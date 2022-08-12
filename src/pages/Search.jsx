@@ -39,7 +39,6 @@ export default class Search extends Component {
   async buttonSearch() {
     const { search, category } = this.state;
     const data = await getProductsFromCategoryAndQuery(category, search);
-    console.log(data.results);
     this.setState({ products: data.results });
   }
 
