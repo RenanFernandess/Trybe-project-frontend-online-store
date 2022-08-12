@@ -39,6 +39,7 @@ export default class Search extends Component {
   async buttonSearch() {
     const { search, category } = this.state;
     const data = await getProductsFromCategoryAndQuery(category, search);
+    console.log(data.results);
     this.setState({ products: data.results });
   }
 
@@ -99,7 +100,7 @@ export default class Search extends Component {
                       <Products
                         name={ title }
                         price={ price }
-                        image={ thumbnail }
+                        image={ thumbnail.replace(/(I\.jpg){1}$/g, 'W.jpg') }
                         id={ id }
                       />
                       <button
