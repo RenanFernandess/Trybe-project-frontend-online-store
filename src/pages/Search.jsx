@@ -99,7 +99,7 @@ export default class Search extends Component {
                       <Products
                         name={ title }
                         price={ price }
-                        image={ thumbnail }
+                        image={ thumbnail.replace(/(I\.jpg){1}$/g, 'W.jpg') }
                         id={ id }
                       />
                       <button
