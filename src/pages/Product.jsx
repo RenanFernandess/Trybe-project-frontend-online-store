@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { getProduct } from '../services';
+import { AddToCartButton } from '../components';
 
 export default class Product extends Component {
   state = {
@@ -9,22 +11,12 @@ export default class Product extends Component {
 
   async componentDidMount() {
     const { match: { params: { id } } } = this.props;
-    const url = `https://api.mercadolibre.com/items/${id}`;
-    const request = await fetch(url);
-    const response = await request.json();
-    this.setState({ product: response });
-  }
-
-  addInCart = () => {
-    const { product } = this.state;
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    const trueCart = (cart) || [];
-    trueCart.push(product);
-    localStorage.setItem('cart', JSON.stringify(trueCart));
+    const product = await getProduct(id);
+    this.setState({ product });
   }
 
   render() {
-    const { product: { title, price, thumbnail, attributes } } = this.state;
+    const { product: { title, price, thumbnail, attributes }, product } = this.state;
     console.log(attributes);
     return (
       <div>
@@ -38,13 +30,7 @@ export default class Product extends Component {
             ))}
           </ul>
         </section>
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ this.addInCart }
-        >
-          Adicionar ao Carrinho
-        </button>
+        <AddToCartButton product={ product } />
         <Link to="/ShoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
       </div>
     );
