@@ -1,7 +1,7 @@
 import AddToCartButton from './AddToCartButton';
-import Products from './Products';
+import ProductCard from './ProductCard';
 
-export default Products;
+export default ProductCard;
 export {
   AddToCartButton,
 };
