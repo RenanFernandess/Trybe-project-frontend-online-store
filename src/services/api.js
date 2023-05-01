@@ -11,7 +11,7 @@ export async function getCategories() {
 }
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
-  const url = `${BASE_URL}/sites/MLB/search?category=$${categoryId}&q=$${query}`;
+  const url = `${BASE_URL}/sites/MLB/search?category=${categoryId}&q=${query}`;
   return fetchAPI(url);
 }
 
