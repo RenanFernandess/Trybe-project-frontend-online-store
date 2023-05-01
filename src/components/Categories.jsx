@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import ProductContext from '../context';
 
 export default class Categories extends Component {
   state = {
@@ -12,9 +13,14 @@ export default class Categories extends Component {
     this.setState({ categories });
   }
 
+  searchByCategory = async ({ target: { value } }) => {
+    const { setCategoryAndProducts } = this.context;
+    const data = await getProductsFromCategoryAndQuery(value);
+    setCategoryAndProducts(value, data.results);
+  }
+
   render() {
     const { categories } = this.state;
-    const { inputChange } = this.props;
     return (
       <form className="categories">
         <h2>categorias</h2>
@@ -30,7 +36,7 @@ export default class Categories extends Component {
               id={ category.id }
               name="category"
               value={ category.id }
-              onChange={ inputChange }
+              onChange={ this.searchByCategory }
             />
             { category.name }
           </label>
@@ -39,6 +45,8 @@ export default class Categories extends Component {
     );
   }
 }
+
+Categories.contextType = ProductContext;
 
 Categories.propTypes = {
   inputChange: PropTypes.func,
