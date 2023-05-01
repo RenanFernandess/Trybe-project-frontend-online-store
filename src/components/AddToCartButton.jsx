@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import getItemFromLocalStorage, { saveItemToLocalStorage } from '../services';
-
-const CART = 'cart';
+import { CartContext } from '../context';
 
 export default class AddToCartButton extends Component {
   addInCart = () => {
     const { product } = this.props;
-    const cart = getItemFromLocalStorage(CART) || [];
-    saveItemToLocalStorage(CART, [...cart, product]);
+    const { addProductInCart } = this.context;
+    addProductInCart(product);
   }
 
   render() {
@@ -26,6 +24,8 @@ export default class AddToCartButton extends Component {
     );
   }
 }
+
+AddToCartButton.contextType = CartContext;
 
 AddToCartButton.defaultProps = {
   className: undefined,
