@@ -29,7 +29,7 @@ export default class Product extends Component {
             ))}
           </ul>
         </section>
-        <AddToCartButton product={ product } />
+        <AddToCartButton product={ product } testid="product-detail-add-to-cart" />
       </div>
     );
   }
