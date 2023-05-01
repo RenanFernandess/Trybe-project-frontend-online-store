@@ -12,8 +12,8 @@ export default class ProductProvider extends Component {
     this.setState({ products });
   }
 
-  setCategory = (category) => {
-    this.setState({ category });
+  setCategoryAndProducts = (category, products) => {
+    this.setState({ category, products });
   }
 
   render() {
@@ -22,7 +22,7 @@ export default class ProductProvider extends Component {
     const contextType = {
       ...this.state,
       setProducts: this.setProducts,
-      setCategory: this.setCategory,
+      setCategoryAndProducts: this.setCategoryAndProducts,
     };
 
     return (
