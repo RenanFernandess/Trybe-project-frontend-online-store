@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { getProduct } from '../services';
 import { AddToCartButton } from '../components';
 
@@ -31,7 +30,6 @@ export default class Product extends Component {
           </ul>
         </section>
         <AddToCartButton product={ product } />
-        <Link to="/ShoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
       </div>
     );
   }
