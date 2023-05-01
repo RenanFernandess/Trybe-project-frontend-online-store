@@ -4,7 +4,7 @@ import ProductContext from './ProductContext';
 
 export default class ProductProvider extends Component {
   state = {
-    products: [],
+    products: null,
     category: '',
   }
 
