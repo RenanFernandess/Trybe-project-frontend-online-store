@@ -8,21 +8,19 @@ class ProductCard extends Component {
   render() {
     const { product: { title, thumbnail, price, id }, product } = this.props;
     return (
-      <div className="product">
+      <div className="product-card" data-testid="product">
         <Link className="link" to={ `/Product/${id}` } data-testid="product-detail-link">
-          <div className="product-card" data-testid="product">
-            <img
-              className="product-image"
-              src={ thumbnail.replace(/(I\.jpg){1}$/g, 'W.jpg') }
-              alt={ title }
-            />
-            <strong className="product-title">{ title }</strong>
-            <p className="product-price">
-              R$
-              {' '}
-              { price }
-            </p>
-          </div>
+          <img
+            className="product-image"
+            src={ thumbnail.replace(/(I\.jpg){1}$/g, 'W.jpg') }
+            alt={ title }
+          />
+          <strong className="product-title">{ title }</strong>
+          <p className="product-price">
+            R$
+            {' '}
+            { price }
+          </p>
         </Link>
         <AddToCartButton
           className="button primary-button"
