@@ -6,7 +6,7 @@ import AddToCartButton from './AddToCartButton';
 
 class ProductCard extends Component {
   render() {
-    const { product: { name, thumbnail, price, id }, product } = this.props;
+    const { product: { title, thumbnail, price, id }, product } = this.props;
     return (
       <div className="product">
         <Link className="link" to={ `/Product/${id}` } data-testid="product-detail-link">
@@ -14,9 +14,9 @@ class ProductCard extends Component {
             <img
               className="product-image"
               src={ thumbnail.replace(/(I\.jpg){1}$/g, 'W.jpg') }
-              alt={ name }
+              alt={ title }
             />
-            <strong className="product-title">{ name }</strong>
+            <strong className="product-title">{ title }</strong>
             <p className="product-price">
               R$
               {' '}
@@ -35,7 +35,7 @@ class ProductCard extends Component {
 
 ProductCard.propTypes = {
   product: propTypes.shape({
-    name: propTypes.string.isRequired,
+    title: propTypes.string.isRequired,
     thumbnail: propTypes.string.isRequired,
     price: propTypes.number.isRequired,
     id: propTypes.string.isRequired,
