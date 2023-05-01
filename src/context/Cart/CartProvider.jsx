@@ -6,8 +6,12 @@ import getItemFromLocalStorage, { saveItemToLocalStorage } from '../../services'
 const CART = 'cart';
 
 export default class CartProvider extends Component {
-  state = getItemFromLocalStorage(CART) || {
+  state = {
     cartProducts: [],
+  };
+
+  componentDidMount() {
+    this.setState(getItemFromLocalStorage(CART) || {});
   }
 
   addProductInCart = (product) => {
