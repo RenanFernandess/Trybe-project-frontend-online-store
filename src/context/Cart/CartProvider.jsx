@@ -4,6 +4,7 @@ import CartContext from './CartContext';
 import getItemFromLocalStorage, { saveItemToLocalStorage } from '../../services';
 
 const CART = 'cart';
+const NOT_CONTAIN = -1;
 
 export default class CartProvider extends Component {
   state = {
@@ -18,7 +19,9 @@ export default class CartProvider extends Component {
     this.setState(
       ({ cartProducts }) => {
         const productIndex = cartProducts.indexOf(product);
-        if (!productIndex) return { cartProducts: [...cartProducts, product] };
+        if (productIndex === NOT_CONTAIN) {
+          return { cartProducts: [...cartProducts, product] };
+        }
         if (cartProducts[productIndex].quantityInCart) {
           cartProducts[productIndex].quantityInCart += 1;
         }
