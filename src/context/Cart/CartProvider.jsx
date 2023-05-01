@@ -16,20 +16,24 @@ export default class CartProvider extends Component {
   }
 
   addProductInCart = (product) => {
-    this.setState(
-      ({ cartProducts }) => {
-        const productIndex = cartProducts.indexOf(product);
-        if (productIndex === NOT_CONTAIN) {
-          return { cartProducts: [...cartProducts, product] };
-        }
-        if (cartProducts[productIndex].quantityInCart) {
-          cartProducts[productIndex].quantityInCart += 1;
-        }
-        cartProducts[productIndex].quantityInCart = 1;
-        return { cartProducts };
-      },
-      this.saveCartToStorage,
-    );
+    this.setState(({ cartProducts }) => {
+      const productIndex = cartProducts.indexOf(product);
+      if (productIndex === NOT_CONTAIN) {
+        return { cartProducts: [...cartProducts, product] };
+      }
+      if (cartProducts[productIndex].quantityInCart) {
+        cartProducts[productIndex].quantityInCart += 1;
+      }
+      cartProducts[productIndex].quantityInCart = 1;
+      return { cartProducts };
+    }, this.saveCartToStorage);
+  }
+
+  changeQuantity = (value, index) => {
+    this.setState(({ cartProducts }) => {
+      cartProducts[index].quantityInCart += value;
+      return { cartProducts };
+    }, this.saveCartToStorage);
   }
 
   saveCartToStorage = () => {
@@ -39,7 +43,11 @@ export default class CartProvider extends Component {
   render() {
     const { children } = this.props;
 
-    const contextType = { ...this.state, addProductInCart: this.addProductInCart };
+    const contextType = {
+      ...this.state,
+      addProductInCart: this.addProductInCart,
+      changeQuantity: this.changeQuantity,
+    };
 
     return (
       <CartContext.Provider value={ contextType }>
