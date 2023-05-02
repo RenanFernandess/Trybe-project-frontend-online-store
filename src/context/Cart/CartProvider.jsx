@@ -41,18 +41,14 @@ export default class CartProvider extends Component {
   changeQuantity = (value, index) => {
     this.setState(({ cartProducts }) => {
       const products = [...cartProducts];
-      products[index].quantityInCart += value;
+      const quantityInCart = products[index].quantityInCart + value || 1;
+      products[index] = {
+        ...products[index],
+        quantityInCart,
+      };
       return { cartProducts: products };
     });
   }
-
-  // addOnMore = (index) => {
-  //   this.setState(({ cartProducts }) => {
-  //     const products = [...cartProducts];
-  //     products[index].quantityInCart += 1;
-  //     return { cartProducts: products };
-  //   }, this.saveCartToStorage);
-  // }
 
   removeProduct = (productId) => {
     const { cartProducts } = this.state;
