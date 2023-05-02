@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { CartContext } from '../context';
 
-export default class CartItem extends Component {
+const REDUCER = -1;
+export default class ProductCardInCart extends Component {
   render() {
-    const { image, title, price, quantity,
-      id, incrementItem, reduceItem, removeItem } = this.props;
+    const { image, title, price, quantity, index, id } = this.props;
+    const { changeQuantity, removeProduct } = this.context;
     return (
       <div>
         <img src={ image } alt={ title } />
@@ -12,8 +14,7 @@ export default class CartItem extends Component {
         <p>{ price }</p>
         <div>
           <button
-            onClick={ incrementItem }
-            name={ id }
+            onClick={ () => { changeQuantity(1, index); } }
             type="button"
             data-testid="product-increase-quantity"
           >
@@ -21,18 +22,14 @@ export default class CartItem extends Component {
           </button>
           <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
           <button
-            onClick={ reduceItem }
-            name={ id }
+            onClick={ () => { changeQuantity(REDUCER, index); } }
             type="button"
             data-testid="product-decrease-quantity"
           >
             -
           </button>
-          <br />
-          <br />
           <button
-            onClick={ removeItem }
-            name={ id }
+            onClick={ () => { removeProduct(id); } }
             type="button"
             data-testid="remove-product"
           >
@@ -44,13 +41,13 @@ export default class CartItem extends Component {
   }
 }
 
-CartItem.propTypes = {
-  title: propTypes.string,
-  image: propTypes.string,
-  price: propTypes.number,
-  quantity: propTypes.number,
-  incrementItem: propTypes.func,
-  reduceItem: propTypes.func,
-  id: propTypes.string,
-  removeItem: propTypes.func,
-}.isRequired;
+ProductCardInCart.contextType = CartContext;
+
+ProductCardInCart.propTypes = {
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+};
