@@ -19,7 +19,7 @@ class Header extends Component {
     const { search } = this.state;
     return (
       <header className="main-header">
-        <h1 className="title">MercaDão</h1>
+        <h1 className="title"><Link to="/">MercaDão</Link></h1>
         <div className="serch-form-cont">
           <div className="serch-form">
             <input
