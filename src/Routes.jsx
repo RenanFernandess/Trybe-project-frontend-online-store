@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Search from './pages/Search';
-import ShoppingCart from './pages/ShoppingCart';
-import Product from './pages/Product';
+import Search, { ShoppingCart, Product } from './pages';
 
 export default class Routes extends Component {
   render() {
