@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ProductContext from '../context';
+import ProductContext, { CartConsumer } from '../context';
 import { getProductsFromCategoryAndQuery } from '../services';
 
 class Header extends Component {
@@ -41,13 +41,21 @@ class Header extends Component {
           </div>
         </div>
         <nav>
-          <Link
-            className="button primary-button"
-            data-testid="shopping-cart-button"
-            to="/ShoppingCart"
-          >
-            Carrinho de compra
-          </Link>
+          <CartConsumer>
+            {
+              ({ totalAmount }) => (
+                <Link
+                  className="button primary-button"
+                  data-testid="shopping-cart-button"
+                  to="/ShoppingCart"
+                >
+                  Carrinho de compra
+                  { '  ' }
+                  <span data-testid="shopping-cart-size">{ totalAmount }</span>
+                </Link>
+              )
+            }
+          </CartConsumer>
         </nav>
       </header>
     );

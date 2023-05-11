@@ -6,6 +6,8 @@ import getItemFromLocalStorage, { saveItemToLocalStorage } from '../../services'
 export default class CartProvider extends Component {
   state = {
     cartProducts: [],
+    totalAmount: 0,
+    totalPrice: 0,
   };
 
   CART_KEY = 'cart'
@@ -31,10 +33,11 @@ export default class CartProvider extends Component {
           ...products[productIndex],
           quantityInCart: products[productIndex].quantityInCart + 1,
         };
-        return { cartProducts: products };
+        return { cartProducts: products, ...this.calcTotalAmountAndPrice(products) };
       }
       product.quantityInCart = 1;
-      return { cartProducts: [...cartProducts, product] };
+      const products = [...cartProducts, product];
+      return { cartProducts: products, ...this.calcTotalAmountAndPrice(products) };
     });
   }
 
@@ -46,15 +49,25 @@ export default class CartProvider extends Component {
         ...products[index],
         quantityInCart,
       };
-      return { cartProducts: products };
+      return { cartProducts: products, ...this.calcTotalAmountAndPrice(products) };
     });
   }
 
   removeProduct = (productId) => {
     const { cartProducts } = this.state;
     const products = cartProducts.filter(({ id }) => productId !== id);
-    this.setState({ cartProducts: products });
+    this.setState({ cartProducts: products, ...this.calcTotalAmountAndPrice(products) });
   }
+
+  calcTotalAmountAndPrice = (products) => products
+    .reduce((acc, curr) => {
+      acc.totalAmount += curr.quantityInCart;
+      acc.totalPrice += curr.price;
+      return acc;
+    }, {
+      totalAmount: 0,
+      totalPrice: 0,
+    })
 
   saveCartToStorage = () => {
     saveItemToLocalStorage(this.CART_KEY, this.state);
