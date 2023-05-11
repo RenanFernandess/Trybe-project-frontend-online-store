@@ -1,0 +1,26 @@
+.c-loading {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  left: 45vw;
+  position: absolute;
+  top: 50vh;
+  transform: scale(4);
+}
+
+.c-loading__item {
+  animation: is-loading 1.2s infinite;
+  border: 0.2rem solid #e5e5e5;
+  border-radius: 50%;
+  border-top-color: yellow;
+  height: 2rem;
+  transition: 200ms;
+  width: 2rem;
+}
+
+@keyframes is-loading {
+
+  to {
+    transform: rotate(2turn);
+  }
+}
