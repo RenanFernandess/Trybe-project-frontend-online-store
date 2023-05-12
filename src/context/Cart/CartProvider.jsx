@@ -46,9 +46,10 @@ export default class CartProvider extends Component {
     this.setState(({ cartProducts }) => {
       const products = [...cartProducts];
       const quantityInCart = products[index].quantityInCart + value || 1;
+      const { available_quantity: maxQuantity } = products[index];
       products[index] = {
         ...products[index],
-        quantityInCart,
+        quantityInCart: quantityInCart > maxQuantity ? maxQuantity : quantityInCart,
       };
       return { cartProducts: products, ...this.calcTotalAmountAndPrice(products) };
     });
