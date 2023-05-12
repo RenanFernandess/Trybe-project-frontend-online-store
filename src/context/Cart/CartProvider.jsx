@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import CartContext from './CartContext';
 import getItemFromLocalStorage, { saveItemToLocalStorage } from '../../services';
 
+const INITIAL_STATE = {
+  cartProducts: [],
+  totalAmount: 0,
+  totalPrice: 0,
+};
 export default class CartProvider extends Component {
-  state = {
-    cartProducts: [],
-    totalAmount: 0,
-    totalPrice: 0,
-  };
+  state = INITIAL_STATE;
 
   CART_KEY = 'cart'
 
@@ -73,6 +74,12 @@ export default class CartProvider extends Component {
     saveItemToLocalStorage(this.CART_KEY, this.state);
   }
 
+  clearCart = () => {
+    this.setState(INITIAL_STATE, () => {
+      localStorage.removeItem(this.CART_KEY);
+    });
+  }
+
   render() {
     const { children } = this.props;
 
@@ -81,6 +88,7 @@ export default class CartProvider extends Component {
       addProductInCart: this.addProductInCart,
       changeQuantity: this.changeQuantity,
       removeProduct: this.removeProduct,
+      clearCart: this.clearCart,
     };
 
     return (
