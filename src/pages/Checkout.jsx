@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ProductCardInCart } from '../components';
+import { ProductCardInCart, CheckoutForm } from '../components';
 import { CartContext } from '../context';
 
 export default class Checkout extends Component {
@@ -7,7 +7,7 @@ export default class Checkout extends Component {
     const { cartProducts, totalPrice } = this.context;
 
     return (
-      <div>
+      <div style={ { display: 'flex' } }>
         <section>
           <div>
             {
@@ -30,6 +30,7 @@ export default class Checkout extends Component {
             { totalPrice.toFixed(2) }
           </p>
         </section>
+        <CheckoutForm />
       </div>
     );
   }
