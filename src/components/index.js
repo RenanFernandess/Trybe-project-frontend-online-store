@@ -5,6 +5,7 @@ import ProductCardInCart from './ProductCardInCart';
 import FreeShipping from './FreeShipping';
 import Assessments from './Assessments';
 import Loading from './Loading';
+import CheckoutForm from './CheckoutForm';
 
 export default Header;
 export {
@@ -14,4 +15,5 @@ export {
   FreeShipping,
   Assessments,
   Loading,
+  CheckoutForm,
 };
